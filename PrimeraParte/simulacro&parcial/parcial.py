@@ -102,10 +102,9 @@ print(f"90 no ven ninguno de esos programas, compruebo:{ningunoDeEsosProgramas(u
 # Resolver y responder:
 print(f"1. Cuántos entrevistados ven los 3 tipos de programas?, respuesta:{sumo(interseccionABC(animales, comicos,deportivos))}")
 
-#MAL, CONTEMPLAR LA INTERSECCION RESTANDO EL CONJUNTO RESTANTE
-print(f"2. Cuántos entrevistados sólo lo ven deportivos y cómicos?, respuesta:{sumo(interseccionAyB(deportivos,comicos))}")
-print(f"3. Cuántos entrevistados ven sólo cómicos y mundo animal?, respuesta:{sumo(interseccionAyB(comicos,animales))}")
-print(f"4. Cuántos entrevistados ven sólo deportivos y mundo animal, respuesta: {sumo(interseccionAyB(deportivos,animales))}")
+print(f"2. Cuántos entrevistados sólo lo ven deportivos y cómicos?, respuesta:{sumo(interseccionAyB(deportivos,comicos)-animales)}")
+print(f"3. Cuántos entrevistados ven sólo cómicos y mundo animal?, respuesta:{sumo(interseccionAyB(comicos,animales)-deportivos)}")
+print(f"4. Cuántos entrevistados ven sólo deportivos y mundo animal, respuesta: {sumo(interseccionAyB(deportivos,animales)-comicos)}")
 
 print(f"5. Cuántos entrevistados ven sólo deportes?, respuesta: {sumo(soloUnPrograma(deportivos,comicos,animales))}")
 print(f"6. Cuántos entrevistados ven sólo cómicos?, respuesta: {sumo(soloUnPrograma(comicos,deportivos,animales))}")
