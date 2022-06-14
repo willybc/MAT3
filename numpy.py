@@ -73,22 +73,36 @@ print(f"Calculo del promedio de los elementos de las primeras dos filas utilizan
 
 #%%
 # 3.
+import numpy as np
+import pandas as pd
 # Generar una matriz de 7 x 9.
+a = np.random.randint(10, size=(7,9))
 # Las primeras 3 columnas de la matriz tienen que tener el valor 0.
-# La cuarta columna debe tener el valor 0.5, excepto por el ultimo valor de esa columna, que tiene que ser 0.7
+a[0:7,0] = 0
+a[0:7,1] = 0
+a[0:7,2] = 0
 # Las otras tres columnas deben tener el valor 1.
+a[0:7,3] = 1
+a[0:7,4] = 1
+a[0:7,5] = 1
 # Luego imprimir la matriz.
+print(a)
 # Imprimir tambien el promedio de la ultima fila
-
-
+#Obtengo la ultima fila
+b = a[-1]
+print(np.mean(b))
+     
 #%%
 # 4.
 # La siguiente linea crea una matriz aleatoria de 5 por 5 con valores entre 0 y 1
-matriz_aleatoria = np.random.rand(5,5)
-print(matriz_aleatoria)
+matriz_aleatoria = np.random.randint(2, size=(5,5))
+np.asarray(matriz_aleatoria)
+#print(matriz_aleatoria)
 
 # Imprimir las posiciones (Fila y Columna) de los elementos de la matriz que son mayores que 0.5
+print("Impresion de posiciones en donde los elementos son mayores a 0.5")
 
+np.transpose( np.where(matriz_aleatoria>0.5) )
 
 #%%
 # 5.
