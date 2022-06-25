@@ -12,7 +12,7 @@ import numpy as np
 
 
 # 1.
-# Utilizar el algoritmo de Dijkstra para determinar en el grafo ponderado sigueinte un camino de longitud minima entre los
+# Utilizar el algoritmo de Dijkstra para determinar en el grafo ponderado siguiente un camino de longitud minima entre los
 # vertices Z y A. Construir el grafo
 
 #Pasos para Algoritmo Dijkstra
@@ -32,82 +32,67 @@ fig, ax = plt.subplots()
 
 #L2 = [('A','D'), ('A','G'), ('A','B'), ('D','G'), ('D','E'), ('G','B'), ('E','F'), ('E','Z'), ('C','F'), ('C','Z'), ('C','B'), ('F','Z')]
 #G = nx.Graph()
-nx.draw(G, node_color="palevioletred", font_size=10, width=1, with_labels=True, node_size=1000)
+nx.draw(G, node_color="palevioletred", font_size=10, width=1, with_labels=True, node_size=300)
 plt.show()
 
 #%%
 # 2.
+import networkx as nx
+import matplotlib.pyplot as plt
 # El plano muestra los puntos de conexion y las posibles lineas telefonicas en una urbanizacion. 
 # La zona quedara comunicada cuando dos puntos cualquiera esten conectados
 # En rojo esta indicado el precio de cada linea en miles de dolares.
 # Calcular el diseño de la red mas barata que conecte la zona.
 
-g = nx.Graph()
-
-g.add_node('a')
-g.add_node('b')
-g.add_node('c')
-g.add_node('d')
-g.add_node('e')
-g.add_node('f')
-g.add_node('g')
-g.add_node('h')
-g.add_node('i')
-g.add_node('j')
-g.add_node('k')
-g.add_node('l')
-g.add_node('m')
-g.add_node('n')
-
-g.add_edge('a', 'b', weidght=6)
-g.add_edge('a', 'd', weidght=3)
-g.add_edge('a', 'c', weidght=9)
-
-g.add_edge('b', 'e', weidght=12)
-g.add_edge('b', 'c', wedight=10)
-
-g.add_edge('c', 'd', weidght=4)
-g.add_edge('c', 'e', weidght=3)
-
-g.add_edge('d', 'g', weidght=10)
-g.add_edge('d', 'f', weidght=15)
-
-g.add_edge('e', 'h', weidght=4)
-g.add_edge('e', 'i', weidght=11)
-g.add_edge('e', 'f', weidght=8)
-
-g.add_edge('f', 'i', weidght=10)
-g.add_edge('f', 'g', weidght=9)
-
-g.add_edge('g', 'j', weidght=13)
-
-g.add_edge('h', 'k', weidght=20)
-g.add_edge('h', 'i', weidght=7)
-g.add_edge('h', 'l', weidght=11)
-
-g.add_edge('i', 'l', weidght=11)
-g.add_edge('i', 'j', weidght=15)
-
-g.add_edge('j', 'l', weidght=11)
-g.add_edge('j', 'm', weidght=9)
-
-g.add_edge('k', 'l', weidght=13)
-g.add_edge('k', 'n', weidght=6)
-
-g.add_edge('l', 'n', weidght=12)
-g.add_edge('l', 'm', weidght=5)
-
-g.add_edge('m', 'n', weidght=5)
-
-pos = nx.get_node_attributes(g)
-labels = nx.get_edge_attributes(g, 'weight')
-
-nx.draw_networkx_edge_labels(g, pos, edge_labels=labels)
-nx.draw(g, pos, with_labels=True)
-
-print(nx.shortest_path(g, source=1, target=10))
-plt.show()
+def emitoGraph(G, pos):
+    nx.draw_networkx_nodes(G, pos, node_color='violet', node_size=100)
+    nx.draw_networkx_labels(G, pos, font_size=10, font_family='sans-serif')
+    
+    nx.draw_networkx_edges(G, pos, edge_color='grey', width=1, arrowstyle='<|-|>', arrowsize=10)
+    labels = nx.get_edge_attributes(G, 'weight')
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    plt.axis('off')
+    plt.show()
+    
+def cargoGraph(G):
+    G.add_weighted_edges_from([('a', 'b', 6),
+                               ('a', 'd', 3),
+                               ('a', 'c', 9),
+                               ('b', 'e', 12),
+                               ('b', 'c', 10),
+                               ('c', 'd', 4),
+                               ('c', 'e', 3),
+                               ('d', 'g', 10),
+                               ('d', 'f', 15),
+                               ('e', 'h', 4),
+                               ('e', 'i', 11),
+                               ('e', 'f', 8),
+                               ('f', 'i', 10),
+                               ('f', 'g', 9),
+                               ('g', 'j', 13),
+                               ('h', 'k', 20),
+                               ('h', 'i', 7),
+                               ('h', 'l', 11),
+                               ('i', 'l', 11),
+                               ('i', 'j', 15),
+                               ('j', 'l', 11),
+                               ('j', 'm', 9),
+                               ('k', 'l', 13),
+                               ('k', 'n', 6),
+                               ('l', 'n', 12),
+                               ('l', 'm', 5),
+                               ('m', 'n', 5)])
+    
 # Construir el grafo y calcular : Radio, diametro, excentricidad, centro, periferia y densidad
+
+G = nx.Graph()
+cargoGraph(G)
+
+#pos = nx.shell_layout(G)
+pos = nx.spring_layout(G)
+emitoGraph(G, pos)
+
+print("Red mas barata que conecte la zona: :",nx.algorithms.dijkstra_path(G, 'a', 'n'))
 
 #%%
 # 3.
